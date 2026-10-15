@@ -7,38 +7,38 @@ int main()
     cout << "Enter IPv4 address: ";
     getline(cin, ip);
 
-    string octet[4];    //store 4 parts of ip
+    string octet[4];    
     int count = 0;
-    string temp = "";    //create one octet at a time
+    string temp = "";    
 
-    // Separate IPv4 address into four parts
-    for (int i = 0; i <= ip.length(); i++)  //check all characters
+  
+    for (int i = 0; i <= ip.length(); i++) 
     {
-        if (ip[i] == '.' || i == ip.length())      //after dot asumes one octet complete
+        if (ip[i] == '.' || i == ip.length())      
         {
-            if (temp == "")   //check space betn 2 dots
+            if (temp == "")   
             {
                 cout << "Invalid IPv4 Address" << endl;
                 return 0;
             }
-            octet[count] = temp;   //temp no. store in array
-            count++;                //increase indexing value by 1
-            temp = "";              //empty temp for next use
+            octet[count] = temp;   
+            count++;                
+            temp = "";              
 
-            if (count > 4)              //check octet count
-            {
+            if (count > 4)              
+                        {
                 cout << "Invalid IPv4 Address" << endl;
                 return 0;
             }
         }
         else
         {
-            temp = temp + ip[i];    //store next character of ip in temp
+            temp = temp + ip[i];    
         }
     }
 
     // Check exactly four octets
-    if (count != 4)              //check exactly 4 octet
+    if (count != 4)              
     {
         cout << "Invalid IPv4 Address" << endl;
         return 0;
@@ -49,9 +49,9 @@ int main()
     for (int i = 0; i < 4; i++)
     {
         // Check numeric only
-        for (int j = 0; j < octet[i].length(); j++)    //chacter no j in octet no i 
+        for (int j = 0; j < octet[i].length(); j++)    
         {
-            if (octet[i][j] < '0' || octet[i][j] > '9')   //check charcter is digit 
+            if (octet[i][j] < '0' || octet[i][j] > '9')   
             {
                 cout << "Invalid IPv4 Address" << endl;
                 return 0;
@@ -59,15 +59,15 @@ int main()
         }
 
         // Check leading zero
-        if (octet[i].length() > 1 && octet[i][0] == '0')  //check no of digit more then 1 and first char of octet is 0
+        if (octet[i].length() > 1 && octet[i][0] == '0')  
         {
             cout << "Invalid IPv4 Address" << endl;
             return 0;
         }
 
-        // Convert string to integer
-        value[i] = stoi(octet[i]);     //stoi means string t integer
-        if (value[i] < 0 || value[i] > 255)   //check range of each octet
+        
+        value[i] = stoi(octet[i]);    
+        if (value[i] < 0 || value[i] > 255)   
         {
             cout << "Invalid IPv4 Address" << endl;
             return 0;
@@ -157,21 +157,3 @@ int main()
 
     return 0;
 }
-/*Enter IPv4 address: 124.23.45.5
-
-Valid IPv4 Address
-First Byte: 124
-First Byte as Integer: 124
-Class: A
-Net ID: 124
-Host ID: 23.45.5
-Network Address: 124.0.0.0*/
-
-/*Enter IPv4 address: 256.23.34.45
-Invalid IPv4 Address
-Enter IPv4 address: 234.23.34.56.67
-Invalid IPv4 Address
-Enter IPv4 address: 234*.34.34.34
-Invalid IPv4 Address
-Enter IPv4 address: o1.23.45.6
-Invalid IPv4 Address*/
